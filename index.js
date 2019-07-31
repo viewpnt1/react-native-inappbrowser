@@ -100,7 +100,8 @@ async function _openAuthSessionPolyfillAsync(
   );
 
   try {
-    return await Promise.race([open(startUrl, options), _waitForRedirectAsync(returnUrl)]);
+    open(startUrl, options);
+    return await _waitForRedirectAsync(returnUrl);
   } finally {
     close();
     Linking.removeEventListener('url', _redirectHandler);
